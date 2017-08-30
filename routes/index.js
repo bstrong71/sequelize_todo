@@ -7,8 +7,10 @@ const router    = express.Router();
 router.get("/", function(req, res) {
   models.Todo.findAll()
     .then(function(data) {
-      console.log("THIS IS TODO DATA", data);
       res.render("index", {todo: data});
+    })
+    .catch(function(err) {
+      res.redirect("/");
     });
 });
 
@@ -19,13 +21,49 @@ router.post("/", function(req, res) {
   })
   .then(function(data) {
     res.redirect("/");
+  })
+  .catch(function(err) {
+    res.redirect("/");
   });
 });
 
-//complete tast//
+//view task to edit//
+router.get("/edit/:id", function(req, res) {
+  models.Todo.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function(data) {
+    res.render("edit", {todo: data});
+  })
+  .catch(function(err) {
+    res.redirect("/");
+  });
+});
+
+//edit a task//
+router.post("/edit/:id", function(req, res) {
+  models.Todo.update({
+    task: req.body.task,
+  }, {
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(function(data) {
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.redirect("/");
+    });
+});
+
+
+//complete task//
 router.get("/complete/:id", function(req, res) {
   models.Todo.update({
-    name: req.body.name,
+    task: req.body.task,
     complete: true
   }, {
     where: {
@@ -34,10 +72,26 @@ router.get("/complete/:id", function(req, res) {
   })
     .then(function(data) {
       res.redirect("/");
+    })
+    .catch(function(err) {
+      res.redirect("/");
     });
 });
 
-
+//delete a task//
+router.get("/delete/:id", function(req, res) {
+  models.Todo.destroy({
+    where: { //only retrieves if it exists//
+      id: req.params.id
+    }
+  })
+    .then(function(data) {
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.redirect("/");
+    });
+});
 
 
 module.exports = router;
