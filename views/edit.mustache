@@ -1,6 +1,16 @@
-{{#todo}}
-  <form action="/edit/{{id}}" method="post">
-    <input type="text" name="task" value="{{task}}" placeholder="Task">
-    <input type="submit" value="Submit">
-  </form>
-{{/todo}}
+<head>
+  <meta charset="utf-8">
+  <title>To Do with Sequelize</title>
+  <link rel="stylesheet" href="../main.css">
+</head>
+<div class="editBox">
+  <h3>Edit This Task</h3>
+  {{#todo}}
+    <div class="formBox">
+      <form action="/edit/{{id}}" method="post">
+        <input type="text" name="task" value="{{task}}" placeholder="Task">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  {{/todo}}
+</div>
