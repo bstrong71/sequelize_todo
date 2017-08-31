@@ -24,10 +24,26 @@ h3{
   text-align: center;
 }
 
+.editBox h3{
+  font-size: 30px;
+  padding: 30px;
+}
+
+#editInput{
+  width: 15%;
+}
+
 .formBox form {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.formBox form input{
+  font-size: 24px;
+  margin: 20px;
+  padding: 15px;
+  width: 50%;
 }
 
 form{
