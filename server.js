@@ -18,6 +18,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-app.listen(3000, function() {
-  console.log("App is running on localhost:3000");
+app.listen(8000, function() {
+  console.log("App is live on 8000");
 });
